@@ -1,5 +1,5 @@
-language: generic
 sudo: required
+language: generic
 
 services:
   - docker
@@ -7,8 +7,8 @@ services:
 before_install:
   - docker build -t francescofucile/react-test -f ./client/Dockerfile.dev ./client
 
-scripts:
-  - docker run francescofucile/react-test npm test -- --coverage
+script:
+  - docker run -e CI=true francescofucile/react-test npm test
 
 after_success:
   - docker build -t francescofucile/multi-client ./client
